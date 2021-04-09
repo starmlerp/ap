@@ -1,7 +1,7 @@
-##introduction
+## introduction
 this repository contains a single makefile, intended to be run on a raspberry pi, in order to start a wifi access point
 
-##usage
+## usage
 if you have installed this repository for the first time, move into it, and run:
 ```sudo make init```
 this should initialize your access point.
@@ -14,5 +14,5 @@ in order to turn off the access point, run:
 to reactivate, run:
 ```sudo make activate```
 
-##license
+## license
 [mit](./LICENSE)
