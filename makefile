@@ -12,6 +12,8 @@ init:
 	systemctl enable hostapd
 	apt install dnsmasq
 	apt install -y netfilter-persistent iptables-persistent
+	touch /etc/dhcpcd.conf
+	cp /etc/dhcpcd.conf /etc/dhcpcd.conf.old
 	printf "interface wlan0\n\tstatic ip_address=192.168.4.1/24\n\tnohook wpa_supplicant" >> /etc/dhcpcd.conf
 	touch /etc/dnsmasq.conf
 	mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
@@ -21,9 +23,13 @@ init:
 activate:
 	systemctl unmask hostapd
 	systemctl enable hostapd
+	touch /etc/dhcpcd.conf
+	cp /etc/dhcpcd.conf /etc/dhcpcd.conf.old
+	printf "interface wlan0\n\tstatic ip_address=192.168.4.1/24\n\tnohook wpa_supplicant" >> /etc/dhcpcd.conf
 	systemctl reboot
 deactivate:
 	systemctl disable hostapd
 	systemctl mask hostapd
 	systemctl disable dnsmasq
+	cp /etc/dhcpcd.conf.old /etc/dhcpcd.conf
 	systemctl reboot
